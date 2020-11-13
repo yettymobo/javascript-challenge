@@ -27,7 +27,7 @@
     </div>
     <div class="container">
       <div class="row margin-top-50">
-        <div class="col-md-2">
+        <div class="col-md-3">
           <aside class="filters">
             <div class="panel panel-default">
               <div class="panel-heading">Filter Search</div>
@@ -36,9 +36,27 @@
                   <div class="form-group">
                     <ul class="list-group" id="filters">
                       <li class="filter list-group-item">
-                        <label for="date">Enter a Date</label>
-                        <input class="form-control" id="datetime" type="text" placeholder="1/11/2011">
-                      </li>
+                        <label for="date">Date</label>
+                        <select class="form-control" id="datetime" type="text" placeholder="">
+                          <option value="" selected disabled>Please select</option>
+                        </select>
+                        <label for="date">City</label>
+                        <select class="form-control" id="city" type="text">
+                          <option value="" selected disabled>Please select</option>
+                        </select>
+                        <label for="date">State</label>
+                        <select class="form-control" id="state" type="text">
+                          <option value="" selected disabled>Please select</option>
+                        </select>
+                        <label for="date">Country</label>
+                        <select class="form-control" id="country" type="text">
+                          <option value="" selected disabled>Please select</option>
+                        </select>
+                        <label for="date">Shape</label>
+                        <select class="form-control" id="shape" type="text">
+                          <option value="" selected disabled>Please select</option>
+                        </select>
+                       </li>
                     </ul>
                   </div>
                   <button id="filter-btn" type="button" class="btn btn-default">Filter Table</button>
@@ -47,7 +65,7 @@
             </div>
           </aside>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9">
           <div id="table-area" class="">
             <table id="ufo-table" class="table table-striped">
               <thead>

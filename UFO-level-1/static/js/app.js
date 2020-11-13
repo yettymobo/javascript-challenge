@@ -3,8 +3,9 @@ var tableData = data;
 
 // YOUR CODE HERE!
 
-//Generate full html table
+//GENERATE FULL HTML TABLE
 function buildTable(data) {
+    //map field variables
     var datetime = data.map(ufo=>ufo.datetime);
     var city = data.map(ufo=>ufo.city);
     var state = data.map(ufo=>ufo.state);
@@ -16,6 +17,8 @@ function buildTable(data) {
     var table = d3.select("#ufo-table");
     var tbody = table.select("tbody");
     var trow;
+
+//iterate over field values and append to table
     for (var i = 0; i < datetime.length; i++) {
         trow = tbody.append("tr");
         trow.append("td").text(datetime[i]);
@@ -29,11 +32,9 @@ function buildTable(data) {
 }
 buildTable(data);
 
-//Filter table based on Input
+//FILTER TABLE BASED ON INPUT VALUES
 var button = d3.select("#filter-btn");
-var form = d3.select("form");
 button.on('click', filteredRequest);
-d3.select("form").on("submit", filteredRequest)
 
 function filteredRequest() {
     var table = d3.select("#ufo-table");
@@ -42,8 +43,7 @@ function filteredRequest() {
     tbody.html("");
     var inputElement = d3.select('#datetime');
     var inputValue = inputElement.property('value');
-    console.log(inputValue);
-    //console.log(tableData);
+    
 
     var filteredData = data.filter(ufo => ufo.datetime === inputValue);
 
@@ -52,7 +52,7 @@ function filteredRequest() {
         buildTable(filteredData);
     }
     else {
-        above.text("No results found for selected value. All UFO sightings shown below");
+        above.text("No results found for selected date. All UFO sightings shown below");
         buildTable(data);
     }
 };

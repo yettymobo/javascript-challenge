@@ -2,15 +2,17 @@
 var tableData = data;
 
 // YOUR CODE HERE!
-var datetime = data.map(ufo=>ufo.datetime)
-var city = data.map(ufo=>ufo.city)
-var state = data.map(ufo=>ufo.state)
-var country = data.map(ufo=>ufo.country)
-var shape = data.map(ufo=>ufo.shape)
-var durationMinutes = data.map(ufo=>ufo.durationMinutes)
-var comments = data.map(ufo=>ufo.comments)
 
-function buildTable(datetime, city, state, country, shape, durationMinutes, comments) {
+//Generate full html table
+function buildTable(data) {
+    var datetime = data.map(ufo=>ufo.datetime);
+    var city = data.map(ufo=>ufo.city);
+    var state = data.map(ufo=>ufo.state);
+    var country = data.map(ufo=>ufo.country);
+    var shape = data.map(ufo=>ufo.shape);
+    var durationMinutes = data.map(ufo=>ufo.durationMinutes);
+    var comments = data.map(ufo=>ufo.comments);
+
     var table = d3.select("#ufo-table");
     var tbody = table.select("tbody");
     var trow;
@@ -25,4 +27,32 @@ function buildTable(datetime, city, state, country, shape, durationMinutes, comm
         trow.append("td").text(comments[i]);
     }
 }
-buildTable(datetime, city, state, country, shape, durationMinutes, comments);
+buildTable(data);
+
+//Filter table based on Input
+var button = d3.select("#filter-btn");
+var form = d3.select("form");
+button.on('click', filteredRequest);
+d3.select("form").on("submit", filteredRequest)
+
+function filteredRequest() {
+    var table = d3.select("#ufo-table");
+    var tbody = table.select("tbody");
+    var above = d3.select("#notif");
+    tbody.html("");
+    var inputElement = d3.select('#datetime');
+    var inputValue = inputElement.property('value');
+    console.log(inputValue);
+    //console.log(tableData);
+
+    var filteredData = data.filter(ufo => ufo.datetime === inputValue);
+
+    if (filteredData.length !== 0) {
+        above.text("");
+        buildTable(filteredData);
+    }
+    else {
+        above.text("No results found for selected value. All UFO sightings shown below");
+        buildTable(data);
+    }
+};
